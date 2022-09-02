@@ -5,3 +5,8 @@ router
     .route('/all')
     .get(userController.getAllUsers)
     .post()
+router
+    .route('/random')
+    .get(userController.randomUser)
+
+module.exports = router;
