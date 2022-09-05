@@ -9,8 +9,8 @@ module.exports.createUser = (req, res, next)=>{
     fs.readFile('file.json', 'utf8', (err, content) => {
         if (err) throw err
     let data = JSON.parse(content)
-    const dt=req.body
-    data.push(dt)
+    const reqData=req.body
+    data.push(reqData)
 
     fs.writeFile('file.json', JSON.stringify(data, null, 2), (err) => {
         if (err) throw err
@@ -19,6 +19,28 @@ module.exports.createUser = (req, res, next)=>{
         }
     })
     })   
+}
+module.exports.bulkUpdate=(req, res, next)=> {
+    const data = req.body;
+    users.forEach(user => {
+        data.forEach(singleData => {
+            if (user.id == singleData.id) {
+                 if(singleData.name){user.name=singleData.name}
+                if(singleData.gender){user.gender=singleData.gender}
+                if(singleData.address){user.address=singleData.address}               
+                if(singleData.contact){user.contact=singleData.contact}
+                if(singleData.photoUrl){user.photoUrl=singleData.photoUrl}
+            }
+        })
+    })
+    fs.writeFile('file.json', JSON.stringify(users, null, 2), (err) => {
+        if (err) {
+            res.send('internal server error')
+        } else {
+            res.send('Updated successfuly')
+        }
+        
+    })
 }
 
 module.exports.updateUser = (req, res, next) => {
@@ -29,7 +51,8 @@ module.exports.updateUser = (req, res, next) => {
     updatedUser.gender=req.body.gender
     updatedUser.name = req.body.name;
     updatedUser.contact = req.body.contact;
-    updatedUser.address = req.body.address;   
+    updatedUser.address = req.body.address; 
+    updatedUser.photoUrl = req.body.photoUrl;
     res.send(updatedUser);
 }
 
