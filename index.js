@@ -7,10 +7,13 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json())
+// app.use('/public', express.static(__dirname + '/public'));  
+// app.use(express.static(__dirname + '/public')); 
 
-app.use('/api/v1/users', userRoutes)
-app.get('/', (req, res) => {
-    res.send('hi')
+app.use('/users', userRoutes)
+app.get('/save', (req, res) => {
+    // res.send('hi')
+    
 })
 app.all('*', (req, res) => {
   res.send('No route found')
