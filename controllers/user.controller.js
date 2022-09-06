@@ -7,6 +7,7 @@ module.exports.getAllUsers = (req, res, next) => {
 }
 module.exports.createUser = (req, res, next)=>{
     fs.readFile('file.json', 'utf8', (err, content) => {
+        console.log(content)
         if (err) throw err
     let data = JSON.parse(content)
     const reqData=req.body
@@ -15,7 +16,7 @@ module.exports.createUser = (req, res, next)=>{
     fs.writeFile('file.json', JSON.stringify(data, null, 2), (err) => {
         if (err) throw err
         else {
-            res.send(content)
+            res.send('Updated successfully')
         }
     })
     })   
