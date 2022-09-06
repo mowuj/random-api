@@ -1,6 +1,6 @@
-let users = require('../public/users.json')
-const fs =require('fs')
 
+const fs =require('fs')
+let users=require('../file.json')
 module.exports.getAllUsers = (req, res, next) => {
     res.json(users)
     
@@ -37,7 +37,7 @@ module.exports.bulkUpdate=(req, res, next)=> {
         if (err) {
             res.send('internal server error')
         } else {
-            res.send('Updated successfuly')
+            res.send('Updated successfully')
         }
         
     })

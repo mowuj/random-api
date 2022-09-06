@@ -11,9 +11,9 @@ app.use(express.json())
 // app.use(express.static(__dirname + '/public'));
 
 // https://intense-gorge-50700.herokuapp.com/users/all
-app.use('/users', userRoutes)
-app.get('/save', (req, res) => {
-    // res.send('hi')
+app.use('/user', userRoutes)
+app.get('/', (req, res) => {
+    res.send('Welcome to Random Api')
     
 })
 app.all('*', (req, res) => {
